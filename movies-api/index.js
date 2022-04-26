@@ -6,6 +6,8 @@ import './seedData'
 import usersRouter from './api/users';
 import session from 'express-session';
 import authenticate from './authenticate';
+import passport from './authenticate';
+
 
 dotenv.config();
 
@@ -34,6 +36,8 @@ app.use('/api/users', usersRouter);
 
 app.use(errHandler);
 
+app.use(passport.initialize());
+app.use('/api/movies', passport.authenticate('jwt', {session: false}), moviesRouter);
 
 app.listen(port, () => {
   console.info(`Server running at ${port}`);
