@@ -18,6 +18,11 @@ async function loadUsers() {
     }
   }
 
+  if (process.env.SEED_DB) {
+    loadUsers();
+    loadMovies();//ADD THIS LINE
+  }
+
   export async function loadMovies() {
     console.log('load seed data');
     console.log(movies.length);
@@ -30,7 +35,4 @@ async function loadUsers() {
     }
   }
   
-  if (process.env.SEED_DB) {
-    loadUsers();
-    loadMovies();//ADD THIS LINE
-  }
+  
